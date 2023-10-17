@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Number Guessing Game</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            margin: 50px;
+        }
+    </style>
+    <script>
+        function startGame() {
+            alert("Welcome to the Number Guessing Magic Trick!\n\nThink of a number between 1 and 63 (inclusive).");
+            performMagicTrick();
+        }
+
+        function performMagicTrick() {
+            let guessedNumber = 0;
+
+            // Ask questions about the bits
+            for (let i = 0; i < 6; i++) {
+                let mask = 1 << i;
+                let response = prompt("Is your number in this set? (Answer 'yes' or 'no')\n\n" + generateNumberSet(mask));
+
+                // Update the guessedNumber based on the response
+                if (response && response.toLowerCase() === "yes") {
+                    guessedNumber |= mask;
+                }
+            }
+
+            alert("Your guessed number is: " + guessedNumber);
+        }
+
+        function generateNumberSet(mask) {
+            let set = "";
+            // Display the set of numbers
+            for (let j = 1; j <= 63; j++) {
+                if ((j & mask) !== 0) {
+                    set += j + " ";
+                }
+            }
+            return set;
+        }
+    </script>
+</head>
+<body>
+
+    <h1>Number Guessing Game</h1>
+    <p>Click the button to start the game:</p>
+
+    <button onclick="startGame()">Start Game</button>
+
+</body>
+</html>
